@@ -1,0 +1,18 @@
+# 只用 GitHub 自动签发的临时 GITHUB_TOKEN（机器身份），不引用任何 personal token。
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo test
